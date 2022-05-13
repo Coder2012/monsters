@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavList } from '../Navigation';
 
 export const Home = () => {
   return (
@@ -6,10 +6,7 @@ export const Home = () => {
       <header className="App-header">
         <h1>Monsters Rewards!</h1>
       </header>
-      <nav>
-        <Link to="/kids">Kids</Link> |<Link to="tasks">Tasks</Link> |
-        <Link to="/monsters">Monsters</Link>
-      </nav>
+      <NavList />
     </section>
   );
 };

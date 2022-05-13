@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from 'react-hook-form';
+import STYLES from '../common/styles.module.css';
 
 import {
   useAddTaskMutation,
   useGetTasksQuery,
-} from "../../features/api/apiSlice";
+} from '../../features/api/apiSlice';
+import { NavList } from '../Navigation';
+import { Task } from './Task';
 
 export const Tasks = () => {
   const {
@@ -28,12 +30,12 @@ export const Tasks = () => {
 
   const [addTask] = useAddTaskMutation();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
-      console.log("adding task", data);
+      console.log('adding task', data);
       await addTask(data);
     } catch (err) {
-      console.error("Failed to save the task: ", err);
+      console.error('Failed to save the task: ', err);
     }
   };
 
@@ -43,9 +45,7 @@ export const Tasks = () => {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
     content = tasks.map((task: any) => (
-      <p key={task.id}>
-        {task.title} - {task.points}
-      </p>
+      <Task key={task.id} title={task.title} points={task.points} />
     ));
   } else if (isError) {
     content = <div>{error.toString()}</div>;
@@ -56,25 +56,23 @@ export const Tasks = () => {
       <header className="App-header">
         <h1>Tasks</h1>
       </header>
-      <nav>
-        <Link to="/kids">Kids</Link> |<Link to="/tasks">Tasks</Link> |
-        <Link to="/monsters">Monsters</Link>
-      </nav>
-      <section>{content}</section>
-      <section>
+      <NavList />
+      <section className={STYLES.content}>{content}</section>
+      <section className={STYLES.container}>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <legend>Add a task</legend>
           <input
-            {...register("title", { required: "Enter task title" })}
+            {...register('title', { required: 'Enter task title' })}
             placeholder="title"
           />
           <input
-            {...register("points", {
+            {...register('points', {
               valueAsNumber: true,
-              required: "Enter points for task",
+              required: 'Enter points for task',
             })}
             placeholder="points"
           />
-          <input type="submit" value="Add" />
+          <input className={STYLES.button} type="submit" value="Add" />
         </form>
       </section>
     </section>

@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from 'react-hook-form';
 import {
   useAddKidMutation,
   useGetKidsQuery,
-} from "../../features/api/apiSlice";
+} from '../../features/api/apiSlice';
+import { NavList } from '../Navigation';
+
+import STYLES from '../common/styles.module.css';
+import { Kid } from './kid';
 
 export const Kids = () => {
   const {
@@ -28,12 +31,12 @@ export const Kids = () => {
 
   const [addKid] = useAddKidMutation();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
-      console.log("adding kid", data);
+      console.log('adding kid', data);
       await addKid(data);
     } catch (err) {
-      console.error("Failed to save the kid: ", err);
+      console.error('Failed to save the kid: ', err);
     }
   };
 
@@ -43,9 +46,13 @@ export const Kids = () => {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
     content = kids.map((kid: any) => (
-      <p key={kid.id}>
-        {kid.firstName} - {kid.lastName} - {kid.monster}
-      </p>
+      <Kid
+        key={kid.id}
+        firstName={kid.firstName}
+        lastName={kid.lastName}
+        points={kid.points}
+        monster={kid.monster}
+      />
     ));
   } else if (isError) {
     content = <div>{error.toString()}</div>;
@@ -56,36 +63,35 @@ export const Kids = () => {
       <header className="App-header">
         <h1>Kids</h1>
       </header>
-      <nav>
-        <Link to="/kids">Kids</Link> |<Link to="/tasks">Tasks</Link> |
-        <Link to="/monsters">Monsters</Link>
-      </nav>
-      <section>{content}</section>
-      <section>
+      <NavList />
+      <section className={STYLES.content}>{content}</section>
+      <section className={STYLES.container}>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <legend>Add a new kid</legend>
           <input
-            {...register("firstName", { required: "Enter your first name" })}
+            {...register('firstName', { required: 'Enter your first name' })}
             placeholder="First name"
           />
           <input
-            {...register("lastName", { required: "Enter your last name" })}
+            {...register('lastName', { required: 'Enter your last name' })}
             placeholder="Last name"
           />
-          <select {...register("monster")}>
+          <label>Monster</label>
+          <select {...register('monster')}>
             <option value="0">Izzy</option>
-            <option value="1">Petra</option>
-            <option value="2">Opchoss</option>
-            <option value="3">Izzy</option>
-            <option value="4">Petra</option>
-            <option value="5">Opchoss</option>
-            <option value="6">Izzy</option>
-            <option value="7">Petra</option>
-            <option value="8">Opchoss</option>
-            <option value="9">Izzy</option>
-            <option value="10">Petra</option>
-            <option value="11">Opchoss</option>
+            <option value="1">Opchoss</option>
+            <option value="2">Alien</option>
+            <option value="3">Danger</option>
+            <option value="4">Viking</option>
+            <option value="5">Fang</option>
+            <option value="6">Bubble</option>
+            <option value="7">Hypnotic</option>
+            <option value="8">Happy</option>
+            <option value="9">Runner</option>
+            <option value="10">Cruncher</option>
+            <option value="11">Boxy</option>
           </select>
-          <input type="submit" value="Add" />
+          <input className={STYLES.button} type="submit" value="Add" />
         </form>
       </section>
     </section>
