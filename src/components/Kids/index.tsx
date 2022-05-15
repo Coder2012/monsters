@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {
   useAddKidMutation,
@@ -7,8 +8,21 @@ import { NavList } from '../Navigation';
 
 import STYLES from '../common/styles.module.css';
 import { Kid } from './kid';
+import { getSelectedKidId, selectKid } from './kidSlice';
+
+import type { KidType } from './types';
+import { Status } from '../Status';
+
+type Inputs = {
+  firstName: string;
+  lastName: string;
+  monster: string;
+};
 
 export const Kids = () => {
+  const dispatch = useDispatch();
+  const selectedKidId = useSelector(getSelectedKidId);
+
   const {
     data: kids,
     isLoading,
@@ -16,12 +30,6 @@ export const Kids = () => {
     isError,
     error,
   } = useGetKidsQuery();
-
-  type Inputs = {
-    firstName: string;
-    lastName: string;
-    monster: string;
-  };
 
   const {
     register,
@@ -40,6 +48,14 @@ export const Kids = () => {
     }
   };
 
+  const onKidSelected = (id: string) => {
+    if (id !== selectedKidId) {
+      dispatch(selectKid(id));
+    } else {
+      dispatch(selectKid(null));
+    }
+  };
+
   let content;
 
   if (isLoading) {
@@ -47,11 +63,13 @@ export const Kids = () => {
   } else if (isSuccess) {
     content = kids.map((kid: any) => (
       <Kid
+        isActive={kid.id === selectedKidId}
         key={kid.id}
         firstName={kid.firstName}
         lastName={kid.lastName}
         points={kid.points}
         monster={kid.monster}
+        onClickHandler={() => onKidSelected(kid.id)}
       />
     ));
   } else if (isError) {
@@ -62,6 +80,7 @@ export const Kids = () => {
     <section>
       <header className="App-header">
         <h1>Kids</h1>
+        <Status />
       </header>
       <NavList />
       <section className={STYLES.content}>{content}</section>

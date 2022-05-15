@@ -2,9 +2,11 @@
   border: 4px solid #628297;
   border-radius: 8px;
   display: flex;
-  margin: 16px;
-  min-width: 400px;
+  align-items: center;
+  margin: 16px 0;
+  min-width: 486px;
   max-width: 40%;
+  padding: 0;
 }
 
 .container .title {
@@ -22,4 +24,32 @@
   font-size: 2rem;
   background-color: #628297;
   padding: 9px
+}
+
+.container .deleteButton, .container .taskButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.container .delete {
+  background: none;
+  height: 30px;
+  padding: 8px;
+  fill: red;
+}
+
+.container .taskButton {
+  background: none;
+  border: none;
+  display: flex;
+  width: 100%;
+}
+
+.container .taskContent {
+  background: none;
+  border: none;
+  display: flex;
+  width: 100%;
 }

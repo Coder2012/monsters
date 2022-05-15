@@ -3,7 +3,13 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  padding: 0;
   margin: 16px;
+  cursor: pointer;
+}
+
+.container.active {
+  border: 4px solid #ff4444;
 }
 
 .container .title {
@@ -16,8 +22,14 @@
 
 .container .points {
   display: inline-block;
+  color: #fff;
   font-weight: 800;
   font-size: 2rem;
   background-color: #628297;
-  padding: 9px
+  padding: 9px 0;
+  width: 100%
+}
+
+.container.active .points {
+  background-color: #ff4444;
 }
