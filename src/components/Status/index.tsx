@@ -14,8 +14,8 @@ export const Status = () => {
   return (
     <section>
       <p>
-        Active Kid:{' '}
-        {selectedKidId !== null ? selectedKid?.firstName : 'Selected a kid'}
+        Active:{' '}
+        {selectedKidId !== null ? selectedKid?.firstName : 'Select a kid'}
       </p>
     </section>
   );

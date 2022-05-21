@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 640px) {
+    .container {
+        flex-direction: row;
+    }
+}
+
+.heading {
+    font-size: 1.8rem;
+}
+
+.kid {
+    margin: 0 25px;
+}
+
+.list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    font-size: 1.5rem;
+}
+
+.highlight {
+    color: #00AA00;
+    font-weight: 600;
+}
+
+.total {
+    font-size: 1.5rem;
+    font-weight: 600;
+}

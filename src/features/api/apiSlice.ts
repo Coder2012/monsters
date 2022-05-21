@@ -29,7 +29,7 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Kid'],
     }),
-    updateKidTasks: builder.mutation<any, { id: string; body: object }>({
+    updateKid: builder.mutation<any, { id: string; body: object }>({
       query: ({ id, body }) => ({
         url: `/kids/${id}`,
         method: 'PUT',
@@ -37,16 +37,6 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Kid'],
     }),
-    updateKidPoints: builder.mutation<any, { id: string | null; body: object }>(
-      {
-        query: ({ id, body }) => ({
-          url: `/kids/${id}`,
-          method: 'PUT',
-          body: body,
-        }),
-        invalidatesTags: ['Kid'],
-      }
-    ),
     addTask: builder.mutation({
       query: task => ({
         url: '/tasks',
@@ -64,6 +54,5 @@ export const {
   useAddKidMutation,
   useAddTaskMutation,
   useDeleteTaskMutation,
-  useUpdateKidTasksMutation,
-  useUpdateKidPointsMutation,
+  useUpdateKidMutation,
 } = apiSlice;

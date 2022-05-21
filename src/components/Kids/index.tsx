@@ -39,10 +39,10 @@ export const Kids = () => {
 
   const [addKid] = useAddKidMutation();
 
-  const onSubmit: SubmitHandler<Inputs> = async data => {
+  const onSubmit: SubmitHandler<Inputs> = data => {
     try {
       console.log('adding kid', data);
-      await addKid(data);
+      addKid(data);
     } catch (err) {
       console.error('Failed to save the kid: ', err);
     }

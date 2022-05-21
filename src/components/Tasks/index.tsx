@@ -6,8 +6,7 @@ import {
   useDeleteTaskMutation,
   useGetKidsQuery,
   useGetTasksQuery,
-  useUpdateKidPointsMutation,
-  useUpdateKidTasksMutation,
+  useUpdateKidMutation,
 } from '../../features/api/apiSlice';
 import { NavList } from '../Navigation';
 import { Task } from './Task';
@@ -57,20 +56,17 @@ export const Tasks = () => {
 
   const [addTask] = useAddTaskMutation();
   const [deleteTask] = useDeleteTaskMutation();
-  const [updateKidTasks] = useUpdateKidTasksMutation();
-  const [updateKidPoints] = useUpdateKidPointsMutation();
+  const [updateKid] = useUpdateKidMutation();
 
   useEffect(() => {
     if (selectedKidId && selectedTask) {
       console.log('now I will update the kid', selectedTask?.id);
       const points = selectedKid?.points + selectedTask?.points;
       const taskList = [...(selectedKid?.taskList || []), selectedTaskId];
-      console.log(taskList);
 
-      updateKidPoints({ id: selectedKidId, body: { points } });
-      updateKidTasks({
+      updateKid({
         id: selectedKidId,
-        body: { taskList: JSON.stringify(taskList) },
+        body: { points, taskList: JSON.stringify(taskList) },
       });
 
       dispatch(selectKid(null));
@@ -78,16 +74,16 @@ export const Tasks = () => {
     }
   }, [selectedKidId, selectedTask]);
 
-  const onSubmit: SubmitHandler<Inputs> = async data => {
+  const onSubmit: SubmitHandler<Inputs> = data => {
     try {
       console.log('adding task', data);
-      await addTask(data);
+      addTask(data);
     } catch (err) {
       console.error('Failed to save the task: ', err);
     }
   };
 
-  const onDeleteClicked = (id: string) => {
+  const onDeleteClicked = async (id: string) => {
     console.log(id);
     deleteTask(id);
   };
