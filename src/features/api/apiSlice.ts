@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { KidType } from '../../components/Kids/types';
+import { api } from '../../utils/urls';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
+  baseQuery: fetchBaseQuery({ baseUrl: api }),
   tagTypes: ['Task', 'Kid'],
   endpoints: builder => ({
     getTasks: builder.query<any, void>({
