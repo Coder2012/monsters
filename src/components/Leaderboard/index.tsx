@@ -17,17 +17,14 @@ export const Leaderboard = () => {
   const { data: tasks } = useGetTasksQuery();
 
   const getTaskById = (id: string) => {
-    return tasks?.find((task: TaskType) => {
-      if (task.id === id) return task;
-    });
-  };
+    return tasks?.find((task: TaskType) => task.id == id);
 
   let content;
 
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
-    content = kids.map((kid: any) => (
+    content = kids?.map((kid: any) => (
       <section key={kid.id} className={STYLES.kid}>
         <h2 className={STYLES.heading}>
           {kid.firstName} {kid.lastName}
@@ -47,7 +44,7 @@ export const Leaderboard = () => {
       </section>
     ));
   } else if (isError) {
-    content = <div>{error.toString()}</div>;
+    content = <div>{error?.toString()}</div>;
   }
 
   return (

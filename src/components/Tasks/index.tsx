@@ -48,11 +48,7 @@ export const Tasks = () => {
     points: number;
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
 
   const [addTask] = useAddTaskMutation();
   const [deleteTask] = useDeleteTaskMutation();
@@ -72,7 +68,13 @@ export const Tasks = () => {
       dispatch(selectKid(null));
       dispatch(selectTask(null));
     }
-  }, [selectedKidId, selectedTask]);
+  }, [
+    dispatch,
+    selectedKidId,
+    selectedTask,
+    selectedKid?.points,
+    selectedKid?.taskList,
+  ]);
 
   const onSubmit: SubmitHandler<Inputs> = data => {
     try {

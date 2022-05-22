@@ -10,7 +10,6 @@ import STYLES from '../common/styles.module.css';
 import { Kid } from './kid';
 import { getSelectedKidId, selectKid } from './kidSlice';
 
-import type { KidType } from './types';
 import { Status } from '../Status';
 
 type Inputs = {
@@ -31,11 +30,7 @@ export const Kids = () => {
     error,
   } = useGetKidsQuery();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
 
   const [addKid] = useAddKidMutation();
 
