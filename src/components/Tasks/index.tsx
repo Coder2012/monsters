@@ -74,6 +74,8 @@ export const Tasks = () => {
     selectedTask,
     selectedKid?.points,
     selectedKid?.taskList,
+    selectedTaskId,
+    updateKid,
   ]);
 
   const onSubmit: SubmitHandler<Inputs> = data => {
