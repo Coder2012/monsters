@@ -16,8 +16,8 @@ export const Leaderboard = () => {
 
   const { data: tasks } = useGetTasksQuery();
 
-  const getTaskById = (id: string) => {
-    return tasks?.find((task: TaskType) => task.id == id);
+  const getTaskById = (id: string) =>
+    tasks?.find((task: TaskType) => task.id == id);
 
   let content;
 
