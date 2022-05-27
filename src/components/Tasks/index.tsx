@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import STYLES from '../common/styles.module.css';
 
 import {
@@ -19,6 +20,7 @@ import { getSelectedTaskId, selectTask } from './taskSlice';
 import { useEffect } from 'react';
 
 export const Tasks = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const selectedKidId = useSelector(getSelectedKidId);
   const selectedTaskId = useSelector(getSelectedTaskId);
@@ -94,6 +96,7 @@ export const Tasks = () => {
 
   const onTaskSelected = (id: string) => {
     dispatch(selectTask(id));
+    navigate('/leaderboard', { replace: true });
   };
 
   let content;

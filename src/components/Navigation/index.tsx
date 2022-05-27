@@ -8,7 +8,7 @@ export const NavList = () => {
       <ul>
         <li>
           <NavLink
-            to="/monsters"
+            to="/"
             className={({ isActive }) =>
               isActive ? STYLES.active : STYLES.link
             }
@@ -38,7 +38,7 @@ export const NavList = () => {
         </li>
         <li>
           <NavLink
-            to="/"
+            to="/leaderboard"
             className={({ isActive }) =>
               isActive ? STYLES.active : STYLES.link
             }

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import {
   useAddKidMutation,
   useGetKidsQuery,
@@ -19,6 +20,7 @@ type Inputs = {
 };
 
 export const Kids = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const selectedKidId = useSelector(getSelectedKidId);
 
@@ -46,6 +48,7 @@ export const Kids = () => {
   const onKidSelected = (id: string) => {
     if (id !== selectedKidId) {
       dispatch(selectKid(id));
+      navigate('/tasks', { replace: true });
     } else {
       dispatch(selectKid(null));
     }

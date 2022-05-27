@@ -1,4 +1,4 @@
 export const api =
   process.env.NODE_ENV === 'production'
     ? 'https://monsters-rewards.herokuapp.com/'
-    : 'http://localhost:3000';
+    : 'https://monsters-rewards.herokuapp.com/';
