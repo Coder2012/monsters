@@ -11,7 +11,13 @@
 }
 
 .heading {
+    display: flex;
+    align-items: center;
     font-size: 1.8rem;
+}
+
+.heading img {
+    width: 50px;
 }
 
 .kid {
