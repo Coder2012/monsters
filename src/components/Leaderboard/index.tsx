@@ -81,7 +81,7 @@ export const Leaderboard = () => {
             src={
               ranks[Math.min((Math.ceil(kid.points / 10) * 10) / 10, 220 / 10)]
             }
-            alt="rank image"
+            alt="rank"
           />
           {kid.firstName} {kid.lastName}
         </h2>
