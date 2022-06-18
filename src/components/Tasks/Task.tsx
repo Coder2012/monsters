@@ -1,42 +1,55 @@
 import { MouseEventHandler } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
+import { ReactComponent as TickIcon } from '../../assets/icons/tick.svg';
 import STYLES from './styles.module.css';
 
 interface Props {
+  isAdmin: boolean;
+  isSelected: boolean;
   title: string;
   points: number;
   onDeleteHandler: MouseEventHandler<HTMLButtonElement> | null;
   onTaskHandler: MouseEventHandler<HTMLButtonElement> | null;
 }
 
-export const Task = (props: Props) => {
+export const Task = ({
+  isAdmin = false,
+  isSelected = false,
+  title,
+  points,
+  onDeleteHandler,
+  onTaskHandler,
+}: Props) => {
   const TaskContent = () => {
     return (
       <>
-        <span className={STYLES.title}>{props.title}</span>
-        <span className={STYLES.points}>{props.points} Pts</span>
+        <span className={STYLES.title}>{title}</span>
+        <span className={STYLES.points}>{points} Pts</span>
       </>
     );
   };
   return (
     <div className={STYLES.container}>
-      {props.onDeleteHandler && (
+      {isAdmin && onDeleteHandler && (
         <button
           type="button"
           className={STYLES.deleteButton}
-          onClick={props.onDeleteHandler}
+          onClick={onDeleteHandler}
         >
           <DeleteIcon className={STYLES.delete} />
         </button>
       )}
-      {props.onTaskHandler !== null ? (
-        <button
-          onClick={props.onTaskHandler}
-          type="button"
-          className={STYLES.taskButton}
-        >
-          {<TaskContent />}
-        </button>
+      {onTaskHandler !== null ? (
+        <>
+          {isSelected && <TickIcon className={STYLES.tick} />}
+          <button
+            onClick={onTaskHandler}
+            type="button"
+            className={STYLES.taskButton}
+          >
+            {<TaskContent />}
+          </button>
+        </>
       ) : (
         <div className={STYLES.taskContent}>{<TaskContent />}</div>
       )}

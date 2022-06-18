@@ -24,7 +24,7 @@ export const monsters = [
     component: (
       <>
         <Monster2 />
-        <p>OPCHOSS</p>
+        <p>OCHOSS</p>
       </>
     ),
   },

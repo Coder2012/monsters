@@ -10,6 +10,7 @@ export const Monsters = () => {
         <h1>Monsters!</h1>
       </header>
       <NavList />
+
       <section className={STYLES.items}>
         {monsters.map((monster, index) => {
           return (

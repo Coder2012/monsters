@@ -1,5 +1,6 @@
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import STYLES from '../common/styles.module.css';
 
 import {
   useAddTaskMutation,
@@ -11,17 +12,24 @@ import {
 import { NavList } from '../Navigation';
 import { Task } from './Task';
 import { Status } from '../Status';
-import { useDispatch, useSelector } from 'react-redux';
 import { getSelectedKidId, selectKid } from '../Kids/kidSlice';
 import { KidType } from '../Kids/types';
 import { TaskType } from './types';
-import { getSelectedTaskId, selectTask } from './taskSlice';
-import { useEffect } from 'react';
+import {
+  getSelectedTasks,
+  addSelectedTasks,
+  clearSelectedTasks,
+  removeSelectedTasks,
+} from './taskSlice';
+
+import STYLES from '../common/styles.module.css';
 
 export const Tasks = () => {
+  const { admin } = useParams();
+  const isAdmin = admin === 'admin';
   const dispatch = useDispatch();
   const selectedKidId = useSelector(getSelectedKidId);
-  const selectedTaskId = useSelector(getSelectedTaskId);
+  const selectedTaskIds = useSelector(getSelectedTasks);
 
   const { selectedKid } = useGetKidsQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -29,9 +37,14 @@ export const Tasks = () => {
     }),
   });
 
-  const { selectedTask } = useGetTasksQuery(undefined, {
+  const { selectedTasks } = useGetTasksQuery(undefined, {
     selectFromResult: ({ data }) => ({
-      selectedTask: data?.find((task: TaskType) => task.id === selectedTaskId),
+      selectedTasks: data?.reduce((acc: TaskType[], task: TaskType) => {
+        if (selectedTaskIds.some((id: string) => id === task.id)) {
+          acc.push(task);
+        }
+        return acc;
+      }, []),
     }),
   });
 
@@ -54,30 +67,6 @@ export const Tasks = () => {
   const [deleteTask] = useDeleteTaskMutation();
   const [updateKid] = useUpdateKidMutation();
 
-  useEffect(() => {
-    if (selectedKidId && selectedTask) {
-      console.log('now I will update the kid', selectedTask?.id);
-      const points = selectedKid?.points + selectedTask?.points;
-      const taskList = [...(selectedKid?.taskList || []), selectedTaskId];
-
-      updateKid({
-        id: selectedKidId,
-        body: { points, taskList: JSON.stringify(taskList) },
-      });
-
-      dispatch(selectKid(null));
-      dispatch(selectTask(null));
-    }
-  }, [
-    dispatch,
-    selectedKidId,
-    selectedTask,
-    selectedKid?.points,
-    selectedKid?.taskList,
-    selectedTaskId,
-    updateKid,
-  ]);
-
   const onSubmit: SubmitHandler<Inputs> = data => {
     try {
       console.log('adding task', data);
@@ -93,8 +82,36 @@ export const Tasks = () => {
   };
 
   const onTaskSelected = (id: string) => {
-    dispatch(selectTask(id));
+    if (!selectedTaskIds.includes(id)) {
+      console.log('add task', id);
+      dispatch(addSelectedTasks(id));
+    } else {
+      console.log('remove task', id);
+      dispatch(removeSelectedTasks(id));
+    }
   };
+
+  const onAddTasksHandler = () => {
+    if (selectedKidId && selectedTasks?.length) {
+      console.log('tasks to add: ', selectedTasks);
+      const taskPoints = selectedTasks.reduce((acc: number, task: TaskType) => {
+        return acc + task.points;
+      }, 0);
+      const points = selectedKid?.points + taskPoints;
+      const taskList = [...(selectedKid?.taskList || []), ...selectedTaskIds];
+
+      updateKid({
+        id: selectedKidId,
+        body: { points, taskList: JSON.stringify(taskList) },
+      });
+
+      dispatch(selectKid(null));
+      dispatch(clearSelectedTasks(null));
+    }
+  };
+
+  const isTaskSelected = (id: string) =>
+    selectedTaskIds.some((task: string) => task === id);
 
   let content;
 
@@ -103,6 +120,8 @@ export const Tasks = () => {
   } else if (isSuccess) {
     content = tasks.map((task: any) => (
       <Task
+        isAdmin={isAdmin}
+        isSelected={isTaskSelected(task.id)}
         key={task.id}
         title={task.title}
         points={task.points}
@@ -126,14 +145,23 @@ export const Tasks = () => {
       </header>
       <NavList />
       {selectedKidId ? (
-        <p className={STYLES.heading}>
-          Add a task for {selectedKid?.firstName}
-        </p>
+        <p className={STYLES.heading}>Add tasks for {selectedKid?.firstName}</p>
       ) : (
         <p className={STYLES.heading}>Manage your tasks</p>
       )}
-      <section className={STYLES.content}>{content}</section>
-      {selectedKidId === null && (
+      <section className={STYLES.content}>
+        {content}
+        {selectedTaskIds.length > 0 && (
+          <button
+            className={STYLES.addButton}
+            onClick={onAddTasksHandler}
+            type="button"
+          >
+            Add Tasks
+          </button>
+        )}
+      </section>
+      {isAdmin && selectedKidId === null && (
         <section className={STYLES.container}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <legend>Add a task</legend>

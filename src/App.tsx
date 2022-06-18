@@ -11,7 +11,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Monsters />} />
+          <Route path="/:admin" element={<Monsters />} />
+          <Route path="/kids/:admin" element={<Kids />} />
           <Route path="/kids" element={<Kids />} />
+          <Route path="/tasks/:admin" element={<Tasks />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
