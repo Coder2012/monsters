@@ -11,7 +11,7 @@ import {
 } from '../../features/api/apiSlice';
 import { NavList } from '../Navigation';
 import { Task } from './Task';
-import { Status } from '../Status';
+import { Status } from '../Status/Status';
 import { getSelectedKidId, selectKid } from '../Kids/kidSlice';
 import { KidType } from '../Kids/types';
 import { TaskType } from './types';

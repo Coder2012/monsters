@@ -1,6 +1,6 @@
 import { useGetKidsQuery, useGetTasksQuery } from '../../features/api/apiSlice';
 import { NavList } from '../Navigation';
-import { Status } from '../Status';
+import { Status } from '../Status/Status';
 import { TaskType } from '../Tasks/types';
 
 import rank0 from '../../assets/icons/ranks/unranked.png';

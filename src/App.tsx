@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Leaderboard } from './components/Leaderboard';
-import { Kids } from './components/Kids';
+import { Kids } from './components/Kids/Kids';
 import { Monsters } from './components/Monsters';
 import { Tasks } from './components/Tasks';
 

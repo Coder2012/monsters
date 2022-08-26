@@ -13,7 +13,7 @@ import COMMON_STYLES from '../common/styles.module.css';
 import { Kid } from './kid';
 import { getSelectedKidId, selectKid } from './kidSlice';
 
-import { Status } from '../Status';
+import { Status } from '../Status/Status';
 import { useParams } from 'react-router-dom';
 
 type Inputs = {
