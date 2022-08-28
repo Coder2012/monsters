@@ -32,6 +32,7 @@ export const Task = ({
     <div className={STYLES.container}>
       {isAdmin && onDeleteHandler && (
         <button
+          data-testid="task-delete-button"
           type="button"
           className={STYLES.deleteButton}
           onClick={onDeleteHandler}
@@ -43,6 +44,7 @@ export const Task = ({
         <>
           {isSelected && <TickIcon className={STYLES.tick} />}
           <button
+            data-testid="task-button"
             onClick={onTaskHandler}
             type="button"
             className={STYLES.taskButton}

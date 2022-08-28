@@ -3,7 +3,7 @@ import './App.css';
 import { Leaderboard } from './components/Leaderboard';
 import { Kids } from './components/Kids/Kids';
 import { Monsters } from './components/Monsters';
-import { Tasks } from './components/Tasks';
+import { Tasks } from './components/Tasks/Tasks';
 
 function App() {
   return (

@@ -33,4 +33,29 @@ export const handlers = [
       ctx.delay(10)
     );
   }),
+  rest.get('https://monsters-rewards.herokuapp.com/tasks', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+          id: '62892456e4f23866375446d3',
+          title: 'Piano',
+          points: 10,
+          createdAt: '2022-05-21T17:41:42.484Z',
+        },
+        {
+          id: '6289245ee4f23866375446d4',
+          title: 'Tuition',
+          points: 10,
+          createdAt: '2022-05-21T17:41:50.034Z',
+        },
+        {
+          id: '6289246ee4f23866375446d5',
+          title: 'Make your bed',
+          points: 5,
+          createdAt: '2022-05-21T17:42:06.694Z',
+        },
+      ])
+    );
+  }),
 ];
