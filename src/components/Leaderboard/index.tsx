@@ -1,5 +1,5 @@
 import { useGetKidsQuery, useGetTasksQuery } from '../../features/api/apiSlice';
-import { NavList } from '../Navigation';
+import { NavList } from '../Navigation/NavList';
 import { Status } from '../Status/Status';
 import { TaskType } from '../Tasks/types';
 

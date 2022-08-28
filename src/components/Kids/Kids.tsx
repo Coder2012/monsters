@@ -5,7 +5,7 @@ import {
   useGetKidsQuery,
   useUpdateKidMutation,
 } from '../../features/api/apiSlice';
-import { NavList } from '../Navigation';
+import { NavList } from '../Navigation/NavList';
 
 import STYLES from '../common/styles.module.css';
 import COMMON_STYLES from '../common/styles.module.css';

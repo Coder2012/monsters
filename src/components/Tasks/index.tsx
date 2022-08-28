@@ -9,7 +9,7 @@ import {
   useGetTasksQuery,
   useUpdateKidMutation,
 } from '../../features/api/apiSlice';
-import { NavList } from '../Navigation';
+import { NavList } from '../Navigation/NavList';
 import { Task } from './Task';
 import { Status } from '../Status/Status';
 import { getSelectedKidId, selectKid } from '../Kids/kidSlice';

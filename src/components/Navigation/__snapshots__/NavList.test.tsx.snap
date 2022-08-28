@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavList should render navigation 1`] = `
+<div>
+  <nav
+    class="container"
+  >
+    <ul>
+      <li>
+        <a
+          class="link"
+          href="/"
+        >
+          Monsters
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current="page"
+          class="active"
+          href="/kids"
+        >
+          Kids
+        </a>
+      </li>
+      <li>
+        <a
+          class="link"
+          href="/tasks"
+        >
+          Tasks
+        </a>
+      </li>
+      <li>
+        <a
+          class="link"
+          href="/leaderboard"
+        >
+          Leaderboard
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

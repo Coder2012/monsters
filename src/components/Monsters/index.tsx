@@ -1,4 +1,4 @@
-import { NavList } from '../Navigation';
+import { NavList } from '../Navigation/NavList';
 import { monsters } from '../../utils/monsters';
 
 import STYLES from './styles.module.css';
