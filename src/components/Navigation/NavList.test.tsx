@@ -9,7 +9,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('NavList', () => {
-  it.only('should render navigation', () => {
+  it('should render navigation', () => {
     const { container } = renderWithProviders(
       <MemoryRouter initialEntries={['/kids/']}>
         <NavList />
