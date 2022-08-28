@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
-import { renderWithProviders } from './setupTests';
+import { renderWithProvider } from './setupTests';
 import App from './App';
 
 test('renders app title', () => {
-  renderWithProviders(<App />);
+  renderWithProvider(<App />);
 
   expect(screen.getByText(/Monsters!/i)).toBeInTheDocument();
 });

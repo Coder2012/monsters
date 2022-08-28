@@ -1,6 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react';
 import { MouseEventHandler } from 'react';
-import { renderWithProviders } from '../../setupTests';
+import { renderWithProvider } from '../../setupTests';
 import { Task } from './Task';
 
 interface Props {
@@ -22,13 +22,13 @@ const PROPS = {
 };
 describe('Task component', () => {
   it('should render task with title and points', () => {
-    renderWithProviders(<Task {...PROPS} />);
+    renderWithProvider(<Task {...PROPS} />);
 
     expect(screen.getByText(/Karate/i)).toBeVisible();
   });
 
   it('should call onTaskHandler when clicked', () => {
-    renderWithProviders(<Task {...PROPS} />);
+    renderWithProvider(<Task {...PROPS} />);
 
     fireEvent.click(screen.getByTestId('task-button'));
 
@@ -36,7 +36,7 @@ describe('Task component', () => {
   });
 
   it('should not render delete button', () => {
-    renderWithProviders(<Task {...PROPS} />);
+    renderWithProvider(<Task {...PROPS} />);
 
     expect(screen.queryByTestId('task-delete-button')).not.toBeInTheDocument();
   });
@@ -48,7 +48,7 @@ describe('Task component', () => {
         isAdmin: true,
         onDeleteHandler: jest.fn(),
       };
-      renderWithProviders(<Task {...propsWithAdmin} />);
+      renderWithProvider(<Task {...propsWithAdmin} />);
 
       fireEvent.click(screen.getByTestId('task-delete-button'));
 

@@ -1,5 +1,5 @@
 import { MemoryRouter } from 'react-router-dom';
-import { renderWithProviders } from '../../setupTests';
+import { renderWithProvider } from '../../setupTests';
 import { NavList } from './NavList';
 
 jest.mock('react-router-dom', () => ({
@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('NavList', () => {
   it('should render navigation', () => {
-    const { container } = renderWithProviders(
+    const { container } = renderWithProvider(
       <MemoryRouter initialEntries={['/kids/']}>
         <NavList />
       </MemoryRouter>

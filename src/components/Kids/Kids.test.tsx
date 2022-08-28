@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
-import { renderWithProviders } from '../../setupTests';
+import { renderWithProvider } from '../../setupTests';
 import { Kids } from './Kids';
 
 jest.mock('react-router-dom', () => ({
@@ -18,7 +18,7 @@ describe('Kids component', () => {
       admin: undefined,
     });
 
-    renderWithProviders(
+    renderWithProvider(
       <MemoryRouter initialEntries={['/kids/admin']}>
         <Routes>
           <Route path="/kids/:admin" element={<Kids />} />
@@ -45,7 +45,7 @@ describe('Kids component', () => {
       admin: undefined,
     });
 
-    renderWithProviders(
+    renderWithProvider(
       <MemoryRouter initialEntries={['/kids/admin']}>
         <Routes>
           <Route path="/kids/:admin" element={<Kids />} />
@@ -62,7 +62,7 @@ describe('Kids component', () => {
       admin: 'admin',
     });
 
-    renderWithProviders(
+    renderWithProvider(
       <MemoryRouter initialEntries={['/kids/admin']}>
         <Routes>
           <Route path="/kids/:admin" element={<Kids />} />
