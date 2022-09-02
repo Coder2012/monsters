@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get('https://monsters-rewards.herokuapp.com/kids', (req, res, ctx) => {
+  rest.get('https://monsters-backend.onrender.com/kids', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
@@ -33,7 +33,7 @@ export const handlers = [
       ctx.delay(10)
     );
   }),
-  rest.get('https://monsters-rewards.herokuapp.com/tasks', (req, res, ctx) => {
+  rest.get('https://monsters-backend.onrender.com/tasks', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
